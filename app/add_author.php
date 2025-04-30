@@ -21,18 +21,8 @@ session_start();
             <div class="text-center">
                 <small class="text-danger fs-2">Tous les champs sont obligatoires</small>
                 <div class="bg-warning fs-3 rounded-3">
-                    <?php if(isset($_SESSION['message'])) : ;?>
-                        <?= $_SESSION['message'];?>
-                    <?php endif;?>
-
-                    <?php if(isset($_SESSION['errors'])): ?>
-                        <ul class="list-unstyled">
-                            <?php foreach($_SESSION['errors'] as $error): ?>
-                                <li><?= $error ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                        <?php unset($_SESSION['errors']); ?>
-                    <?php endif; ?>
+                    <?php include_once 'includes/flash_message.php';?>
+                    <?php include_once 'includes/flash_errors.php';?>
                 </div>
             </div>
             <div>

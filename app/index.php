@@ -1,4 +1,10 @@
 <?php
+session_start();
+if(!isset($_SESSION['user'])){
+    $_SESSION['message'] = 'Vous devez vous identifier avant ';
+    header('Location: login.php');
+    exit;
+}
 // Inclut le fichier de connexion à la base de données
 require_once 'includes/dbconnect.php';
 
@@ -24,9 +30,13 @@ $posts = $stmt->fetchAll();
     <title>Liste des articles</title>
 </head>
 
-<body>
-    <header>
+<body class="container">
+    <header class="row">
         <?php include_once 'includes/nav.php'; ?>
+        <p class="fs-1 text-center">Bonjour <span class="text-uppercase"><?= $_SESSION['user']['lastname'] . ' ' . $_SESSION['user']['firstname'];?></span></p>
+        <div class="text-center my-3">
+            <a class="btn btn-warning" href="logout.php">Logout</a>
+        </div>
         <h1 class="text-center text-uppercase fs-1 text-secondary">Liste des articles</h1>
     </header>
 

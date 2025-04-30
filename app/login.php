@@ -17,15 +17,19 @@ session_start();
         <?php include_once 'includes/nav.php'; ?>
     </header>
     <main class="container">
-
-        <form action="login_treatment.php" method="post" class="row w-75 m-auto">
+        <?php if(isset($_SESSION['message'])) : ;?>
+        <div class="bg-warning fs-3 rounded-3 text-center">
+            <?= $_SESSION['message'];?>
+        </div>
+        <?php endif;?>
+        <form action="login_treatment.php" method="post" class="row w-75 m-auto" novalidate>
             <div>
                 <label class="form-label" for="email">E-mail</label>
-                <input class="form-control" type="text" id="email" />
+                <input class="form-control" type="text" id="email" name="email" value="<?= $_SESSION['data']['email'] ?? '';?>"/>
             </div>
             <div>
                 <label class="form-label" for="password">Password</label>
-                <input class="form-control" type="password" id="password" />
+                <input class="form-control" type="password" id="password" name="password"/>
             </div>
             <div class="my-3">
                 <a class="text-decoration-none text-white btn btn-secondary" href="password-reset-request.php">Forget password</a>
@@ -33,8 +37,8 @@ session_start();
             <div class="text-center my-3">
                 <button class="btn btn-primary" type="submit">Login</button>
             </div>
-
         </form>
+        <?php unset($_SESSION['message']) ;?>
     </main>
 </body>
 </html>
